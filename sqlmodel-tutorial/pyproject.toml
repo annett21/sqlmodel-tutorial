@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "sqlmodel-tutorial"
+version = "0.1.0"
+description = ""
+authors = ["annett21 <annettarasevich@gmail.com>"]
+readme = "README.md"
+packages = [{include = "sqlmodel_tutorial"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+sqlmodel = "^0.0.8"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
