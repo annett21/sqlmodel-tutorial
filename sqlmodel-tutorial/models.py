@@ -27,7 +27,7 @@ def create_db_and_tables():
 
 def create_heroes():
     hero_1 = Hero(name="Deadpond", secret_name="Dive Wilson")
-    hero_2 = Hero(name="Spider-Boy", secret_name="Pedro Parqueador")
+    hero_2 = Hero(name="Spider-Youngster", secret_name="Pedro Parqueador")
     hero_3 = Hero(name="Rusty-Man", secret_name="Tommy Sharp", age=48)
     hero_4 = Hero(name="Tarantula", secret_name="Natalia Roman-on", age=32)
     hero_5 = Hero(name="Black Lion", secret_name="Trevor Challa", age=35)
@@ -61,7 +61,7 @@ def select_heroes():
 
 def update_heroes():
     with Session(engine) as session:
-        statement = select(Hero).where(Hero.name == "Spider-Boy")
+        statement = select(Hero).where(Hero.name == "Spider-Youngster")
         results = session.exec(statement)
         hero = results.one()
         print("Hero:", hero)
@@ -73,11 +73,32 @@ def update_heroes():
         print("Updated hero:", hero)
 
 
+def delete_heroes():
+    with Session(engine) as session:
+        statement = select(Hero).where(Hero.name == "Spider-Youngster")
+        results = session.exec(statement)
+        hero = results.one()
+        print("Hero:", hero)
+
+        session.delete(hero)
+        session.commit()
+
+        print("Deleted hero:", hero)
+
+        statement = select(Hero).where(Hero.name == "Spider-Youngster")
+        results = session.exec(statement)
+        hero = results.first()
+
+        if hero is None:
+            print("There's no hero named Spider-Youngster")
+
+
 def main():
-    # create_db_and_tables()
-    # create_heroes()
+    create_db_and_tables()
+    create_heroes()
     select_heroes()
     update_heroes()
+    delete_heroes()
 
 
 if __name__ == "__main__":
