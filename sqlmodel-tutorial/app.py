@@ -16,3 +16,13 @@ class Hero(SQLModel, table=True):
     age: Optional[int] = Field(default=None, index=True)
 
     team_id: Optional[int] = Field(default=None, foreign_key="team.id")
+
+
+sqlite_file_name = "database.db"
+sqlite_url = f"sqlite:///{sqlite_file_name}"
+
+engine = create_engine(sqlite_url, echo=True)
+
+
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
